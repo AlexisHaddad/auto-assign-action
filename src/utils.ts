@@ -3,8 +3,18 @@ import * as yaml from 'js-yaml'
 import { Config } from './handler'
 import { Client } from './types'
 
-export function chooseReviewers(owner: string, config: Config): string[] {
-  const { useReviewGroups, reviewGroups, numberOfReviewers, reviewers } = config
+export function chooseReviewers(
+  owner: string,
+  config: Config,
+  existingReviewers: string[] = []
+): string[] {
+  const {
+    useReviewGroups,
+    reviewGroups,
+    numberOfReviewers,
+    reviewers,
+    pickFromExistingReviewers,
+  } = config
   let chosenReviewers: string[] = []
   const useGroups: boolean =
     useReviewGroups && Object.keys(reviewGroups).length > 0
@@ -17,6 +27,12 @@ export function chooseReviewers(owner: string, config: Config): string[] {
     )
   } else {
     chosenReviewers = chooseUsers(reviewers, numberOfReviewers, owner)
+  }
+  // override the reviewers if pickFromExistingReviewers is true and there are existing reviewers
+  if (pickFromExistingReviewers) {
+    if (existingReviewers.length > 0) {
+      chosenReviewers = existingReviewers
+    }
   }
 
   return chosenReviewers

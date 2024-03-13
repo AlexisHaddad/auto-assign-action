@@ -8,6 +8,7 @@ import { PullRequestEvent } from '@octokit/webhooks-types'
 export interface Config {
   addReviewers: boolean
   addAssignees: boolean | string
+  pickFromExistingReviewers: boolean
   assignSameReviewerAndAssignee: boolean
   reviewers: string[]
   assignees: string[]
@@ -101,7 +102,8 @@ export async function handlePullRequest(
   let reviewers: string[] = []
   if (addReviewers) {
     try {
-      reviewers = utils.chooseReviewers(owner, config)
+      const existingReviewers = await pr.listRequestedReviewers()
+      reviewers = utils.chooseReviewers(owner, config, existingReviewers)
 
       if (reviewers.length > 0) {
         await pr.addReviewers(reviewers)

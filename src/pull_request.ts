@@ -33,6 +33,16 @@ export class PullRequest {
     core.debug(JSON.stringify(result))
   }
 
+  async listRequestedReviewers(): Promise<string[]> {
+    const { owner, repo, number: pull_number } = this.context.issue
+    const result = await this.client.rest.pulls.listRequestedReviewers({
+      owner,
+      repo,
+      pull_number,
+    })
+    return result?.data.users.map((user) => user.login) || []
+  }
+
   hasAnyLabel(labels: string[]): boolean {
     if (!this.context.payload.pull_request) {
       return false

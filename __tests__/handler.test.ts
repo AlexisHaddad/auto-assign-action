@@ -95,6 +95,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -132,6 +133,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -170,6 +172,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -207,6 +210,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -236,6 +240,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -275,6 +280,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -315,6 +321,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -355,6 +362,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -426,6 +434,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {
@@ -514,6 +523,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -557,6 +567,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -605,6 +616,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -656,6 +668,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -704,6 +717,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -751,6 +765,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -798,6 +813,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -853,6 +869,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
@@ -946,6 +963,7 @@ describe('handlePullRequest', () => {
       rest: {
         pulls: {
           requestReviewers: async () => {},
+          listRequestedReviewers: async () => {},
         },
         issues: {
           addAssignees: async () => {},
