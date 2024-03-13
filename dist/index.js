@@ -83,9 +83,11 @@ function handlePullRequest(client, context, config) {
                 }
             }
         }
+        let reviewers = [];
         if (addReviewers) {
             try {
-                const reviewers = utils.chooseReviewers(owner, config);
+                const existingReviewers = yield pr.listRequestedReviewers();
+                reviewers = utils.chooseReviewers(owner, config, existingReviewers);
                 if (reviewers.length > 0) {
                     yield pr.addReviewers(reviewers);
                     core.info(`Added reviewers to PR #${number}: ${reviewers.join(', ')}`);
@@ -99,7 +101,13 @@ function handlePullRequest(client, context, config) {
         }
         if (addAssignees) {
             try {
-                const assignees = utils.chooseAssignees(owner, config);
+                let assignees = [];
+                if (config.assignSameReviewerAndAssignee) {
+                    assignees = reviewers;
+                }
+                else {
+                    assignees = utils.chooseAssignees(owner, config);
+                }
                 if (assignees.length > 0) {
                     yield pr.addAssignees(assignees);
                     core.info(`Added assignees to PR #${number}: ${assignees.join(', ')}`);
@@ -185,6 +193,17 @@ class PullRequest {
                 assignees,
             });
             core.debug(JSON.stringify(result));
+        });
+    }
+    listRequestedReviewers() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { owner, repo, number: pull_number } = this.context.issue;
+            const result = yield this.client.rest.pulls.listRequestedReviewers({
+                owner,
+                repo,
+                pull_number,
+            });
+            return (result === null || result === void 0 ? void 0 : result.data.users.map((user) => user.login)) || [];
         });
     }
     hasAnyLabel(labels) {
@@ -316,8 +335,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.fetchConfigurationFile = exports.chooseUsersFromGroups = exports.includesSkipKeywords = exports.chooseUsers = exports.chooseAssignees = exports.chooseReviewers = void 0;
 const lodash_1 = __importDefault(__nccwpck_require__(250));
 const yaml = __importStar(__nccwpck_require__(1917));
-function chooseReviewers(owner, config) {
-    const { useReviewGroups, reviewGroups, numberOfReviewers, reviewers } = config;
+function chooseReviewers(owner, config, existingReviewers = []) {
+    const { useReviewGroups, reviewGroups, numberOfReviewers, reviewers, pickFromExistingReviewers, } = config;
     let chosenReviewers = [];
     const useGroups = useReviewGroups && Object.keys(reviewGroups).length > 0;
     if (useGroups) {
@@ -325,6 +344,12 @@ function chooseReviewers(owner, config) {
     }
     else {
         chosenReviewers = chooseUsers(reviewers, numberOfReviewers, owner);
+    }
+    // override the reviewers if pickFromExistingReviewers is true and there are existing reviewers
+    if (pickFromExistingReviewers) {
+        if (existingReviewers.length > 0) {
+            chosenReviewers = existingReviewers;
+        }
     }
     return chosenReviewers;
 }
