@@ -31,7 +31,7 @@ export function chooseReviewers(
   // override the reviewers if pickFromExistingReviewers is true and there are existing reviewers
   if (pickFromExistingReviewers) {
     if (existingReviewers.length > 0) {
-      chosenReviewers = existingReviewers
+      chosenReviewers = _.sampleSize(existingReviewers, numberOfReviewers)
     }
   }
 
