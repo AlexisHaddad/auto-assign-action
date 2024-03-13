@@ -348,7 +348,7 @@ function chooseReviewers(owner, config, existingReviewers = []) {
     // override the reviewers if pickFromExistingReviewers is true and there are existing reviewers
     if (pickFromExistingReviewers) {
         if (existingReviewers.length > 0) {
-            chosenReviewers = existingReviewers;
+            chosenReviewers = lodash_1.default.sampleSize(existingReviewers, numberOfReviewers);
         }
     }
     return chosenReviewers;
